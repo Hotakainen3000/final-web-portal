@@ -1,0 +1,50 @@
+.hide {
+  display: none;
+}
+
+.show {
+  position: absolute;
+  list-style: none;
+  display:block;
+  z-index: 10;
+  background-color: white;
+}
+
+.popup {
+  width: 150px;
+  padding: 8px;
+  background-color: lightgray;
+}
+
+.popup li:hover {
+  color: white;
+}
+
+.edit-menu-form,
+.user-edit-menu-form,
+.edit-menu {
+  background-color: lightgray;
+  padding: 8px;
+}
+
+#cancel-btn,
+#user-cancel-btn {
+  margin-top: 17px;
+}
+
+.selected {
+  background-color: lightgray;
+}
+
+.main-page {
+  margin-bottom: 250px;
+}
+
+.user-edit-menu {
+  width: 300px;
+}
+
+.show-menu {
+  position: absolute;
+  display: block;
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <title>Admin Portal Grocery Price Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/style.css">
+  </head>
+  <body>
+    <div class="container main-page">
+      <div id="indexPage">
+          <div class="mt-4 mb-4 p-3 bg-primary text-white rounded">
+              <h1>Grocery Price Tracker</h1>
+              <p>Admin Portal</p>
+          </div>
+          <select id="select-tab" class="form-select" style="width: 380px">
+            <option value="database">Database</option>
+            <option value="users">Users</option>
+          </select>
+          <div id="db-page">
+            <div style="width: 380px;">
+                <h2>Add product</h2>
+                <form id="product">
+                    <div>
+                    <label class="form-label" for="productName">Name</label>
+                    <input class="form-control" type="text" name="productName" id="productName" required>
+                    </div>
+                    <div>
+                        <label class="form-label" for="productPrice">Price</label>
+                        <input class="form-control" type="number" name="productPrice" id="productPrice" required>
+                    </div>
+                    <div>
+                        <label class="form-label" for="productStore">Store</label>
+                        <input class="form-control" type="text" name="productStore" id="productStore" required>
+                    </div>
+                    <div>
+                        <label class="form-label" for="productCategory">Category</label>
+                        <input class="form-control" type="text" name="productCategory" id="productCategory" required>
+                    </div>
+                    <input class="btn btn-primary mt-3 mb-3" type="submit">
+                </form>
+            </div>
+            <div class="container mt-3">
+                <h2>Database items</h2>
+                <select id="select-table" class="form-select" style="width: 380px;">
+                    <option value="ica">Ica</option>
+                    <option value="coop kronoparken">Coop Kronoparken</option>
+                    <option value="coop välsviken">Coop Välsviken</option>
+                    <option value="lidl">Lidle</option>
+                </select>
+                <table class="table" id="product-table">
+                    <tr class="bg-info">
+                        <th>Product</th>
+                        <th>Price(SEK)</th>
+                        <th>Store</th>
+                        <th>Category</th>
+                        
+                    </tr>
+                    <tbody id="databaseTable">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+      <div id="loginPage" class="mx-auto" style="width: 380px;">
+          <div class="mt-4 mb-4 p-3 bg-primary text-white rounded">
+              <h1>Grocery Price Tracker</h1>
+              <p>Admin Portal</p>
+          </div>
+          
+              <h2>Login</h2>
+              <form id="login">
+                  <div class="mb-3">
+                  <label class="form-label" for="email">email: </label>
+                  <input class="form-control" type="email" name="email" id="email" required>
+                  </div>
+                  <div class="mb-3">
+                  <label class="form-label" for="password">password: </label>
+                  <input class="form-control" type="password" name="password" id="password" required>
+              </div>
+                  <input class="btn btn-primary" type="submit">
+            </form>
+      </div>
+      <div id="users-page" class="hide">
+        <button id="update-btn" class="btn btn-primary mt-3 mb-3">Update</button>
+        <button id="add-user-btn" class="btn btn-primary mt-3 mb-3 hide">Add user</button>
+          <table class="table">
+            <tr class="bg-info">
+              <th>Users</th>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Date Of Birth</th>
+              <th>Phone Nr</th>
+            </tr>
+            <tbody id="db-table">
+              
+            </tbody>
+          </table>
+          <ol class="hide popup" id="contextmenu">
+            <li id="edit-user">Edit</li>
+            <li id="reset-password-user">Reset Password</li>
+            <li id="delete-user">Delete</li>
+          </ol>
+      </div>
+  </div>
+  <ul class="menu hide popup">
+      <li class="edit-btn">Edit</li>
+      <li class="delete-btn">Delete</li>
+  </ul>
+  <div class="edit-menu hide rounded">
+      <form class="edit-menu-form">
+          <div class="mb-3">
+              <label class="form-label" for="productNameEdit">Name</label>
+              <input class="form-control" type="text" name="productNameEdit" id="productNameEdit" value="" required>
+          </div>
+          <div class="mb-3">
+              <label class="form-label" for="productPriceEdit">Price</label>
+              <input class="form-control" type="text" name="productPriceEdit" id="productPriceEdit" value="" required>
+          </div>
+          <div class="mb-3">
+              <label class="form-label" for="productStoreEdit">Store</label>
+              <input class="form-control" type="text" name="productStoreEdit" id="productStoreEdit" value="" required>
+          </div>
+          <div class="mb-3">
+              <label class="form-label" for="productCategoryEdit">Category</label>
+              <input class="form-control" type="text" name="productCategoryEdit" id="productCategoryEdit" value="" required>
+          </div>
+          <div>
+              <p class="btn btn-primary edit-btn" id="cancel-btn">Cancel</p>
+              <button class="btn btn-primary edit-btn">Update product</button>
+          </div>
+      </form>
+  </div>
+  <div class="user-edit-menu hide rounded">
+    <form class="user-edit-menu-form">
+      <div class="mb-3">
+        <label class="form-label" for="userEmailEdit">Email</label>
+        <input class="form-control" type="text" name="userEmailEdit" id="userEmailEdit" value="" required>
+    </div>
+        <div class="mb-3">
+            <label class="form-label" for="userNameEdit">Name</label>
+            <input class="form-control" type="text" name="userNameEdit" id="userNameEdit" value="" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="userAddressdit">Address</label>
+            <input class="form-control" type="text" name="userAddressEdit" id="userAddressEdit" value="" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="dateofbirthEdit">Date Of Birth</label>
+            <input class="form-control" type="text" name="dateofbirthEdit" id="dateofbirthEdit" value="" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="userPhonenrEdit">Phone Nr</label>
+            <input class="form-control" type="text" name="userPhonenrEdit" id="userPhonenrEdit" value="" required>
+        </div>
+        <div class="mb-3 hide">
+          <label class="form-label" for="uid">User id</label>
+          <input class="form-control" type="text" name="uid" id="uid" value="">
+      </div>
+        <div>
+            <p class="btn btn-primary edit-btn" id="user-cancel-btn">Cancel</p>
+            <input type="submit" value="Update" class="btn btn-primary edit-btn"></input>
+        </div>
+    </form>
+</div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="bundle.js"></script>
+  </body>
+</html>

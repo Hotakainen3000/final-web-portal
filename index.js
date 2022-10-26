@@ -4,9 +4,20 @@ const path = require("path");
 const app = express();
 
 const { initializeApp } = require('firebase-admin/app');
-initializeApp();
+/* initializeApp({credential: applicationDefault()}); */
 const { getAuth } = require("firebase-admin/auth");
+//--------------------------------------------------------------------
 
+var admin = require("firebase-admin");
+
+var serviceAccount = require("/home/johanHotakainen/web-dev/admin-web-portal/service-account-file.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://grocery-price-tracker-a655d-default-rtdb.europe-west1.firebasedatabase.app"
+});
+
+//--------------------------------------------------------------------
 
 app.use(express.static(path.join(__dirname, "dist")));
 app.use(express.urlencoded({ extended: true }));
